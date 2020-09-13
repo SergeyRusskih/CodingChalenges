@@ -7,8 +7,7 @@ def palindrome_premutation(string):
         return True
 
     dict = {}
-    for i in range(len(string)):
-        current = string[i]
+    for current in string:
         if current in dict:
             dict[current] += + 1
         else:
