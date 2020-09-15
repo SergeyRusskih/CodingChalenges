@@ -8,11 +8,13 @@ def remove_duplicates(list):
             values_set.add(next.data)
         next = next.next
 
-    first = values_set.pop()
-    new_linked_list = SinglyLinkedList(first)
-    for item in enumerate(values_set):
-        new_linked_list.add_node(item)
+    item = values_set.pop()
+    new_linked_list = SinglyLinkedList(item)
 
+    while len(values_set) != 0:
+        item = values_set.pop()
+        new_linked_list.add_node(item)
+        
     return new_linked_list
 
 def test_remove_duplicates():
