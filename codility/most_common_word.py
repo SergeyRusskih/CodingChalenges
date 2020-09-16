@@ -1,11 +1,11 @@
 def most_common_word(paragraph, banned):
-    paragraph = paragraph.replace(".", "").replace(",", "").replace("!", "").replace("?", "").lower()
+    paragraph = "".join([ c if c.isalnum() else " " for c in paragraph.lower() ])
     banned_dict = set(banned)
     paragraph_dict = {}
 
     for _, value in enumerate(paragraph.split(" ")):
         value = value.strip()
-        if value in banned_dict:
+        if value in banned_dict or not value:
             continue
         if value in paragraph_dict:
             paragraph_dict[value] += 1
