@@ -2,42 +2,28 @@ import queue as queue
 
 def num_of_islands(grid):
     count = 0
-    q = queue.Queue()
     grid_len = len(grid)
-    row_len = 0
-    if grid_len > 0:
-        row_len = len(grid[0])
+    row_len = len(grid[0])
     for i in range(grid_len):
         for j in range(row_len):
             if grid[i][j] == '0':
                 continue
             
-            q.put((i, j))
-            
-            while q.qsize() != 0:
-                current_row, current_column = q.get()
-                next_row = current_row + 1
-                if next_row < grid_len:
-                    if grid[next_row][current_column] != '0':
-                        q.put((next_row, current_column))
-                        grid[next_row][current_column] = '0'
-                next_row = current_row - 1
-                if next_row >= 0:
-                    if grid[next_row][current_column] != '0':
-                        q.put((next_row, current_column))
-                        grid[next_row][current_column] = '0'
-                next_column = current_column + 1
-                if next_column < row_len:
-                    if grid[current_row][next_column] != '0':
-                        q.put((current_row, next_column))
-                        grid[current_row][next_column] = '0'
-                next_column = current_column - 1
-                if next_column >= 0:
-                    if grid[current_row][next_column] != '0':
-                        q.put((current_row, next_column))
-                        grid[current_row][next_column] = '0'
+            dfs(i, j, grid, grid_len, row_len)
             count += 1
     return count
+
+def dfs(i, j, grid, grid_len, row_len):
+    if i < 0 or j < 0 or i >= grid_len or j >= row_len:
+        return
+    if grid[i][j] == '1':
+        grid[i][j] = '0'
+
+        dfs(i + 1, j, grid, grid_len, row_len)
+        dfs(i, j + 1, grid, grid_len, row_len)
+        dfs(i - 1, j, grid, grid_len, row_len)
+        dfs(i, j - 1, grid, grid_len, row_len)
+
 
 def test_example_1():
     grid = [
