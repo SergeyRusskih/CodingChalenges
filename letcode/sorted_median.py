@@ -1,5 +1,3 @@
-import math
-
 # O(log (m+n))
 def sorted_median(A, B):
     if len(A) + len(B) == 0: return 0
@@ -7,26 +5,26 @@ def sorted_median(A, B):
     if len(B) == 0: return get_simple_median(A)
     if len(A) > len(B): return sorted_median(B, A)
 
-    min_a, max_a, half = 0, len(A), (len(A) + len(B) + 1) // 2
+    total_length = len(A) + len(B)
+    min_a, max_a, half, is_odd = 0, len(A), (total_length + 1) // 2, (total_length) % 2 == 1
 
-    # [10, 20, | 50, 80, 90]
-    # [3, 4, 9, 10, | 11, 11]
-    while min_a < max_a:
-
-        i = (max_a + min_a + 1) // 2
+    while min_a <= max_a:
+        i = (max_a + min_a) // 2
         j = half - i
-        if i > 0 and A[i-1] <= B[j] and j > 0 and B[j-1] <= A[i]:
-            if (len(A) + len(B)) % 2 == 1: return max(A[i-1], B[j-1])
-            max_i = max(A[i-1], B[j-1])
-            min_j = min(A[i], B[j])
-            if min_j == 0: return 0
-            return (max_i / min_j) / 2
-        if B[j-1] > A[i]:
-            i += 1
-            j = half - i
+
+        left_a = A[i-1] if i > 0 else float('-inf')
+        right_a = A[i] if len(A) > i else float('inf')
+
+        left_b = B[j-1] if j > 0 else float('-inf')
+        right_b = B[j] if len(B) > j else float('inf')
+
+        if i < len(A) and left_b > right_a: min_a = i + 1
+        elif i > 0 and left_a > right_b: max_a = i - 1
         else:
-            i -= 1
-            j = half - i
+            max_left = max(left_a, left_b)
+            if is_odd: return max_left
+            min_right = min(right_a, right_b)
+            return (max_left + min_right) / 2
 
     return ValueError
     
@@ -69,3 +67,18 @@ def test_5():
     nums1 = [2]
     nums2 = []
     assert sorted_median(nums1, nums2) == 2
+
+def test_8():
+    nums1 = [3]
+    nums2 = [-2,-1]
+    assert sorted_median(nums1, nums2) == -1
+
+def test_9():
+    nums1 = [3]
+    nums2 = [1,2]
+    assert sorted_median(nums1, nums2) == 2
+
+def test_10():
+    nums1 = [4]
+    nums2 = [1,2,3]
+    assert sorted_median(nums1, nums2) == 2.5
