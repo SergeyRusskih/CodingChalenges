@@ -2,16 +2,16 @@ def is_balanced(str):
     opened = {"(", "[", "{"}
     closed = {")": "(", "]": "[", "}": "{"}
     
-    letters = []
+    stack = []
     is_open = True
     for i, letter in enumerate(str):
         if letter in opened:
             if not is_open:
                 return i
-            letters.append(letter)
+            stack.append(letter)
         elif letter in closed:
             is_open = False
-            if len(letters) == 0 or letters.pop() != closed[letter]:
+            if not stack or stack.pop() != closed[letter]:
                 return i
     return -1
 
