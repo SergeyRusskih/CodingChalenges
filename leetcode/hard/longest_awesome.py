@@ -3,25 +3,23 @@ def longest_awesome(str):
     memo = dict()
     odd_count = 0
 
-#111
-#101
-#1101
-#221115 -> 
     for i in range(len(str)):
         odd_count = add_letter(memo, str[i], odd_count)
 
-    if is_awsome(len(str), odd_count):
-        return len(str)
-
     longest = 1
     for i in range(len(str)):
+
+        if is_awsome(len(str) - i, odd_count):
+            longest = max(len(str) - i, longest)
+
         tmp_odd_count = odd_count
         tmp_memo = memo.copy()
         for j in range(len(str), i, -1):
             letter = str[j-1]
             tmp_odd_count = substract_letter(tmp_memo, letter, tmp_odd_count)
-            if is_awsome(j - i, tmp_odd_count) and j - i > longest:
-                longest = j - i
+            length = j - 1 - i
+            if is_awsome(length, tmp_odd_count):
+                longest = max(length, longest)
 
         odd_count = substract_letter(memo, str[i], odd_count)
 
@@ -56,23 +54,25 @@ def is_awsome(str_length, odd_count):
         return False
     elif odd_count == 1:
         return True
-    
     return False
 
 def test_example_basic():
-    longest_awesome("1") == 1
+    assert longest_awesome("1") == 1
 
 def test_example_simple():
-    longest_awesome("10") == 1
+    assert longest_awesome("10") == 1
 
 def test_example_101():
-    longest_awesome("101") == 3
+    assert longest_awesome("101") == 3
 
 def test_example_1():
-    longest_awesome("3242415") == 5
+    assert longest_awesome("3242415") == 5
 
 def test_example_2():
-    longest_awesome("12345678") == 1
+    assert  longest_awesome("12345678") == 1
 
 def test_example_3():
-    longest_awesome("213123") == 6
+    assert longest_awesome("213123") == 6
+
+def test_example_4():
+    assert longest_awesome("940884") == 5
