@@ -125,7 +125,7 @@ def list_components(installed):
     for item in installed:
         print(item)
     
-process(sys.stdin)
+#process(sys.stdin)
 
 def test_is_sum_of_three():
     process("""
@@ -153,107 +153,3 @@ REMOVE TCPIP
 LIST
 END
     """.splitlines())
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-DEPEND TELNET TCPIP NETCARD
-DEPEND TCPIP NETCARD
-DEPEND NETCARD TCPIP
-TCPIP depends on NETCARD, ignoring command
-DEPEND DNS TCPIP NETCARD
-DEPEND BROWSER TCPIP HTML
-INSTALL NETCARD
-Installing NETCARD
-INSTALL TELNET
-Installing TCPIP
-Installing TELNET
-INSTALL foo
-Installing foo
-REMOVE NETCARD
-NETCARD is still needed
-INSTALL BROWSER
-Installing HTML
-Installing BROWSER
-INSTALL DNS
-Installing DNS
-LIST
-DNS
-HTML
-NETCARD
-foo
-TCPIP
-TELNET
-BROWSER
-REMOVE TELNET
-Removing TELNET
-REMOVE NETCARD
-NETCARD is still needed
-REMOVE DNS
-Removing DNS
-REMOVE NETCARD
-NETCARD is still needed
-INSTALL NETCARD
-NETCARD is already installed
-REMOVE TCPIP
-TCPIP is still needed
-REMOVE BROWSER
-Removing BROWSER
-Removing TCPIP
-Removing HTML
-REMOVE TCPIP
-TCPIP is not installed
-LIST
-NETCARD
-foo
-END

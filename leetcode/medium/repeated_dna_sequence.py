@@ -1,22 +1,25 @@
 def repeated_dna(s):
-    dna_length = 10
-    if len(s) <= dna_length:
+
+    if len(s) <= 10:
         return []
 
-    sums = [0]
+    hashes = set()
+    added = set()
+    result = []
     for i in range(len(s)):
-        if i < dna_length:
-            sum[0] += hash(s[i])
+        substring = s[i:10+i]
+        if substring in hashes and substring not in added:
+            result.append(substring)
+            added.add(substring)
         else:
-            sum.append(hash(s[i] - sum[i - dna_length]))
+            hashes.add(substring)
 
-  
-    pass
+    return result
 
 def test_example():
     result = repeated_dna("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT")
-    result assert ["AAAAACCCCC","CCCCCAAAAA"]
+    assert result == ["AAAAACCCCC","CCCCCAAAAA"]
 
 def test_example_1():
     result = repeated_dna("AAAAAAAAAAAAA")
-    result assert ["AAAAAAAAAA"]
+    assert result == ["AAAAAAAAAA"]
