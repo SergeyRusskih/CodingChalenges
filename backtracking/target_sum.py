@@ -1,7 +1,18 @@
 def target_sum(arr, k):
 
-    
-    return 0
+    results = []
+    def dfs(current, start, intermediate):
+        if current == k:
+            results.append(list(intermediate))
+
+        for i in range(start, len(arr)):
+            if current + arr[i] <= k:
+                intermediate.append(arr[i])
+                dfs(current + arr[i], i, intermediate)
+                intermediate.pop()
+
+    dfs(0, 0, [])
+    return len(results)
 
 def test_target_sum():
     arr = [ 2, 3, 5, 6, 8 ]
