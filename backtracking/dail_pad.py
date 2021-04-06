@@ -53,6 +53,6 @@ def test_dail_pad_4():
     result = dail_pad(4)
     assert result == 104
 
-def test_dail_pad_3131():
-    result = dail_pad(3131)
-    assert result == 136006598\
+#def test_dail_pad_3131():
+#    result = dail_pad(3131)
+#    assert result == 136006598
