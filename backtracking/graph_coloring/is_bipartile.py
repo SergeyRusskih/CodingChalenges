@@ -1,4 +1,4 @@
-# todo: https://leetcode.com/problems/is-graph-bipartite/
+# https://leetcode.com/problems/is-graph-bipartite/
 def is_bipartile(graph):
     if len(graph) < 2:
         return False
@@ -6,37 +6,19 @@ def is_bipartile(graph):
         return True
 
     colors = { }
+    def dfs(i, color):
+        colors[i] = color
+        for j in graph[i]:
+            if j in colors:
+                if colors[j] == color: return False
+            else:
+                if not dfs(j, 1 - color): return False
 
-    def get_color(i):
-        neighbours = graph[i]
+        return True
 
-        next = None
-        for neighbour in neighbours:
-            if neighbour in colors:
-                if next == None:
-                    next = colors[neighbour]
-                elif colors[neighbour] != next:
-                    return -1
-
-        if next == 0:
-            return 1
-
-        return 0
-
-    visited = set()
-    for i, value in enumerate(graph):
-        if i not in colors:
-            queue = [i]
-            while queue:
-                current = queue.pop(0)
-                visited.add(current)
-                colors[current] = get_color(current)
-                if colors[current] == -1:
-                    return False
-
-                for neighbour in graph[current]:
-                    if neighbour not in visited:
-                        queue.append(neighbour)
+    for i in range(len(graph)):
+        if i in colors: continue
+        if not dfs(i, 0): return False
 
     return True
 
