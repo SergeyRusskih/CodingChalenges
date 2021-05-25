@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/count-number-of-nice-subarrays/
+# todo: https://leetcode.com/problems/count-number-of-nice-subarrays/
 def number_of_subarrays(nums, k):
 
     def at_most(k):
