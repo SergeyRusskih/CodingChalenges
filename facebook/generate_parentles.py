@@ -16,9 +16,9 @@ def generate_parentheses(n):
     return result
 
 def test_1():
-    result = generate_parentles(3)
+    result = generate_parentheses(3)
     assert result == ["()()()","()(())","(())()","(()())","((()))"]
 
 def test_2():
-    result = generate_parentles(1)
+    result = generate_parentheses(1)
     assert result == ["()"]
