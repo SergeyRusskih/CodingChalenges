@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/is-graph-bipartite/
+# Graph coloring
 def is_bipartile(graph):
     if len(graph) < 2:
         return False
